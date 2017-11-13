@@ -1,0 +1,1036 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Pymoli 2.0}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}343}]:} \PY{n}{Observation} \PY{n}{Trend} \PY{l+m+mi}{1}\PY{p}{:} \PY{n}{The} \PY{n}{number} \PY{n}{of} \PY{n}{male} \PY{n}{players} \PY{o+ow}{is} \PY{n}{more} \PY{n}{than} \PY{n}{female} \PY{n}{players}
+          \PY{n}{Observation} \PY{n}{Trend} \PY{l+m+mi}{2}\PY{p}{:} \PY{n}{Users} \PY{o+ow}{in} \PY{n}{the} \PY{n}{age} \PY{n}{group} \PY{n}{of} \PY{l+m+mi}{20}\PY{o}{\PYZhy{}}\PY{l+m+mi}{24} \PY{n}{are} \PY{n}{the} \PY{n}{biggest} \PY{n}{user} \PY{n}{group}
+          \PY{n}{Observation} \PY{n}{Trend} \PY{l+m+mi}{3}\PY{p}{:} \PY{n}{The} \PY{n}{Average} \PY{n}{Purchase} \PY{n}{price} \PY{o+ow}{is} \PY{n}{the} \PY{n}{highest} \PY{k}{for} \PY{n}{the} \PY{n}{age} \PY{n}{groups} \PY{n}{of} \PY{l+m+mi}{6}\PY{o}{\PYZhy{}}\PY{l+m+mi}{10} \PY{o}{\PYZam{}} \PY{l+m+mi}{30}\PY{o}{\PYZhy{}}\PY{l+m+mi}{35}
+              
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{import} \PY{n+nn}{os}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}344}]:} \PY{c+c1}{\PYZsh{}read the file}
+          \PY{n}{pymo\PYZus{}file} \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Pymoli}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{purchase\PYZus{}data.json}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{pymo\PYZus{}raw} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}json}\PY{p}{(}\PY{n}{pymo\PYZus{}file}\PY{p}{)}
+          \PY{n}{pymo\PYZus{}raw}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}344}]:}    Age Gender  Item ID                                  Item Name  Price  \textbackslash{}
+          0   38   Male      165                Bone Crushing Silver Skewer   3.37   
+          1   21   Male      119  Stormbringer, Dark Blade of Ending Misery   2.32   
+          2   34   Male      174                            Primitive Blade   2.46   
+          3   21   Male       92                               Final Critic   1.36   
+          4   23   Male       63                             Stormfury Mace   1.27   
+          
+                       SN  
+          0     Aelalis34  
+          1        Eolo46  
+          2   Assastnya25  
+          3  Pheusrical25  
+          4        Aela59  
+\end{Verbatim}
+        
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}345}]:} \PY{c+c1}{\PYZsh{}Total Number of Players}
+          \PY{n}{Total\PYZus{}count} \PY{o}{=} \PY{n}{pymo\PYZus{}raw}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SN}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{nunique}\PY{p}{(}\PY{p}{)}
+          \PY{n}{Total\PYZus{}count}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}345}]:} 573
+\end{Verbatim}
+        
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}346}]:} \PY{c+c1}{\PYZsh{}Average Purchase Price}
+          \PY{n}{average\PYZus{}price} \PY{o}{=} \PY{n}{pymo\PYZus{}raw}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Price}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+          \PY{n}{average\PYZus{}price}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}346}]:} 2.931192307692303
+\end{Verbatim}
+        
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}347}]:} \PY{c+c1}{\PYZsh{}Total purchase for an item}
+          \PY{n}{unique\PYZus{}count} \PY{o}{=} \PY{n}{pymo\PYZus{}raw}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Item Name}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Price}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+          \PY{n}{unique\PYZus{}count}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}347}]:} Item Name
+          Abyssal Shard                      6.12
+          Aetherius, Boon of the Blessed    19.00
+          Agatha                             9.55
+          Alpha                             10.92
+          Alpha, Oath of Zeal               20.16
+          Name: Price, dtype: float64
+\end{Verbatim}
+        
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}348}]:} \PY{c+c1}{\PYZsh{}Total Number of Purchases}
+          \PY{n}{Total\PYZus{}purchases} \PY{o}{=} \PY{n}{pymo\PYZus{}raw}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Price}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}
+          \PY{n}{Total\PYZus{}purchases}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}348}]:} 780
+\end{Verbatim}
+        
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}349}]:} \PY{c+c1}{\PYZsh{}Total Revenue}
+          \PY{n}{Total\PYZus{}revenue} \PY{o}{=} \PY{n}{pymo\PYZus{}raw}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Price}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+          \PY{n}{Total\PYZus{}revenue}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}349}]:} 2286.3299999999963
+\end{Verbatim}
+        
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}350}]:} \PY{c+c1}{\PYZsh{}count of Male, Female, and other/undisclosed}
+          \PY{n}{gender\PYZus{}count} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{pymo\PYZus{}raw}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Gender}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SN}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{nunique}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+          \PY{n}{gender\PYZus{}count} \PY{o}{=} \PY{n}{gender\PYZus{}count}\PY{o}{.}\PY{n}{rename}\PY{p}{(}\PY{n}{columns}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SN}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Count}\PY{l+s+s2}{\PYZdq{}}\PY{p}{\PYZcb{}}\PY{p}{)}
+          \PY{n}{gender\PYZus{}count}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}350}]:}                        Count
+          Gender                      
+          Female                   100
+          Male                     465
+          Other / Non-Disclosed      8
+\end{Verbatim}
+        
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}351}]:} \PY{c+c1}{\PYZsh{}Percentage of Male, Female, and other/undisclosed Players}
+          \PY{n}{gender\PYZus{}percent} \PY{o}{=} \PY{p}{(}\PY{n}{gender\PYZus{}count}\PY{o}{/}\PY{n}{gender\PYZus{}count}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{o}{*}\PY{l+m+mi}{100}
+          
+          \PY{n}{gender\PYZus{}count}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Percent}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{gender\PYZus{}percent}
+          \PY{n}{gender\PYZus{}count}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}351}]:}                        Count    Percent
+          Gender                                 
+          Female                   100  17.452007
+          Male                     465  81.151832
+          Other / Non-Disclosed      8   1.396161
+\end{Verbatim}
+        
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}352}]:} \PY{c+c1}{\PYZsh{}Purchasing Analysis (Gender)** }
+          
+          \PY{c+c1}{\PYZsh{}The below each broken by gender}
+          \PY{n}{new\PYZus{}df} \PY{o}{=} \PY{n}{pymo\PYZus{}raw}\PY{p}{[}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Gender}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Item Name}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Price}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{]}
+          \PY{n}{gender\PYZus{}purchase\PYZus{}count} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{new\PYZus{}df}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Gender}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Item Name}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{}gender\PYZus{}purchase\PYZus{}count = gender\PYZus{}purchase\PYZus{}count[\PYZsq{}Item Name\PYZsq{}].count()}
+          \PY{n}{gender\PYZus{}purchase\PYZus{}count} \PY{o}{=} \PY{n}{gender\PYZus{}purchase\PYZus{}count}\PY{o}{.}\PY{n}{rename}\PY{p}{(}\PY{n}{columns}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Price}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Count}\PY{l+s+s2}{\PYZdq{}}\PY{p}{\PYZcb{}}\PY{p}{)}
+          \PY{n}{gender\PYZus{}purchase\PYZus{}count}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}352}]:}                                     Count
+          Gender Item Name                         
+          Female Alpha                            2
+                 Alpha, Oath of Zeal              2
+                 Alpha, Reach of Ending Hope      1
+                 Amnesia                          2
+                 Apocalyptic Battlescythe         2
+\end{Verbatim}
+        
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}353}]:} \PY{c+c1}{\PYZsh{}Purchase Count}
+          \PY{n}{gender\PYZus{}purchase\PYZus{}count\PYZus{}male} \PY{o}{=} \PY{n}{gender\PYZus{}purchase\PYZus{}count}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Male}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          \PY{n}{gender\PYZus{}purchase\PYZus{}count\PYZus{}female} \PY{o}{=} \PY{n}{gender\PYZus{}purchase\PYZus{}count}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Female}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          \PY{n}{gender\PYZus{}purchase\PYZus{}count\PYZus{}other} \PY{o}{=} \PY{n}{gender\PYZus{}purchase\PYZus{}count}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Other / Non\PYZhy{}Disclosed}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Male purchase count: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{p}{(}\PY{n+nb}{str}\PY{p}{(}\PY{n}{gender\PYZus{}purchase\PYZus{}count\PYZus{}male}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Female purchase count: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{p}{(}\PY{n+nb}{str}\PY{p}{(}\PY{n}{gender\PYZus{}purchase\PYZus{}count\PYZus{}female}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Other/Nondisclosed purchase count: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{p}{(}\PY{n+nb}{str}\PY{p}{(}\PY{n}{gender\PYZus{}purchase\PYZus{}count\PYZus{}other}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{}Total Purchase Value}
+          \PY{c+c1}{\PYZsh{}Normalized Totals}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Male purchase count: 633
+Female purchase count: 136
+Other/Nondisclosed purchase count: 11
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}354}]:} \PY{n}{sum\PYZus{}df} \PY{o}{=} \PY{n}{pymo\PYZus{}raw}\PY{p}{[}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Gender}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Item Name}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Price}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{]}
+          \PY{n}{gender\PYZus{}purchase\PYZus{}sum} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{sum\PYZus{}df}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Gender}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Item Name}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Price}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+          \PY{n}{gender\PYZus{}purchase\PYZus{}sum}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}354}]:}                                     Price
+          Gender Item Name                         
+          Female Alpha                         3.12
+                 Alpha, Oath of Zeal           5.76
+                 Alpha, Reach of Ending Hope   1.55
+                 Amnesia                       7.14
+                 Apocalyptic Battlescythe      7.82
+\end{Verbatim}
+        
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}355}]:} \PY{c+c1}{\PYZsh{}Total Purchase value}
+          \PY{n}{gender\PYZus{}purchase\PYZus{}sum\PYZus{}male} \PY{o}{=} \PY{n}{gender\PYZus{}purchase\PYZus{}sum}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Male}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          \PY{n}{gender\PYZus{}purchase\PYZus{}sum\PYZus{}female} \PY{o}{=} \PY{n}{gender\PYZus{}purchase\PYZus{}sum}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Female}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          \PY{n}{gender\PYZus{}purchase\PYZus{}sum\PYZus{}other} \PY{o}{=} \PY{n}{gender\PYZus{}purchase\PYZus{}sum}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Other / Non\PYZhy{}Disclosed}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Male purchase price: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{p}{(}\PY{n+nb}{str}\PY{p}{(}\PY{n}{gender\PYZus{}purchase\PYZus{}sum\PYZus{}male}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Price}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Female purchase price: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{p}{(}\PY{n+nb}{str}\PY{p}{(}\PY{n}{gender\PYZus{}purchase\PYZus{}sum\PYZus{}female}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Price}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Other/Nondisclosed purchase price: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{p}{(}\PY{n+nb}{str}\PY{p}{(}\PY{n}{gender\PYZus{}purchase\PYZus{}sum\PYZus{}other}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Price}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Male purchase price: 1867.6800000000007
+Female purchase price: 382.9100000000001
+Other/Nondisclosed purchase price: 35.74
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}356}]:} \PY{c+c1}{\PYZsh{}Average Purchase Price}
+          \PY{n}{gender\PYZus{}purchase\PYZus{}price\PYZus{}male} \PY{o}{=} \PY{p}{(}\PY{n}{gender\PYZus{}purchase\PYZus{}sum\PYZus{}male}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{465}\PY{p}{)}
+          \PY{n}{gender\PYZus{}purchase\PYZus{}price\PYZus{}female} \PY{o}{=} \PY{p}{(}\PY{n}{gender\PYZus{}purchase\PYZus{}sum\PYZus{}female}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{100}\PY{p}{)}
+          \PY{n}{gender\PYZus{}purchase\PYZus{}price\PYZus{}other} \PY{o}{=} \PY{p}{(}\PY{n}{gender\PYZus{}purchase\PYZus{}sum\PYZus{}other}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{8}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Male: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{gender\PYZus{}purchase\PYZus{}price\PYZus{}male}\PY{p}{)}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Female: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{gender\PYZus{}purchase\PYZus{}price\PYZus{}female}\PY{p}{)}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Other: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{gender\PYZus{}purchase\PYZus{}price\PYZus{}other}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Male: Price    4.016516
+dtype: float64
+Female: Price    3.8291
+dtype: float64
+Other: Price    4.4675
+dtype: float64
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}357}]:} \PY{c+c1}{\PYZsh{}Normalized Total}
+          \PY{n}{gender\PYZus{}normalized\PYZus{}price\PYZus{}male} \PY{o}{=} \PY{p}{(}\PY{n}{gender\PYZus{}purchase\PYZus{}sum\PYZus{}male}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{633}\PY{p}{)}
+          \PY{n}{gender\PYZus{}normalized\PYZus{}price\PYZus{}female} \PY{o}{=} \PY{p}{(}\PY{n}{gender\PYZus{}purchase\PYZus{}sum\PYZus{}female}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{136}\PY{p}{)}
+          \PY{n}{gender\PYZus{}normalized\PYZus{}price\PYZus{}other} \PY{o}{=} \PY{p}{(}\PY{n}{gender\PYZus{}purchase\PYZus{}sum\PYZus{}other}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{11}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{}male\PYZus{}purchase\PYZus{}percent = pymo\PYZus{}raw.loc(\PYZsq{}Female\PYZsq{}, gender\PYZus{}purchase\PYZus{}percent)}
+          \PY{c+c1}{\PYZsh{}male\PYZus{}purchase\PYZus{}percent}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Male: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{gender\PYZus{}normalized\PYZus{}price\PYZus{}male}\PY{p}{)}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Female: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{gender\PYZus{}normalized\PYZus{}price\PYZus{}female}\PY{p}{)}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Other: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{gender\PYZus{}normalized\PYZus{}price\PYZus{}other}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Male: Price    2.950521
+dtype: float64
+Female: Price    2.815515
+dtype: float64
+Other: Price    3.249091
+dtype: float64
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}358}]:} \PY{n}{gender\PYZus{}data} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Gender}\PY{l+s+s1}{\PYZsq{}} \PY{p}{:} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Male}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Female}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Other}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}
+                                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Purchase Count}\PY{l+s+s1}{\PYZsq{}} \PY{p}{:} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{633}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{136}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{11}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}
+                                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Average Purchase price}\PY{l+s+s1}{\PYZsq{}} \PY{p}{:} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{4.01}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{3.82}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{4.46}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}
+                                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Total Purchase Value}\PY{l+s+s1}{\PYZsq{}} \PY{p}{:} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{1867.68}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{382.91}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{35.74}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}
+                                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Normalized Totals}\PY{l+s+s1}{\PYZsq{}} \PY{p}{:} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2.95}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2.81}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{3.24}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{\PYZcb{}}\PY{p}{)}
+          \PY{n}{gender\PYZus{}data} \PY{o}{=} \PY{n}{gender\PYZus{}data}\PY{o}{.}\PY{n}{set\PYZus{}index}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Gender}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          \PY{n}{gender\PYZus{}data}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}358}]:}        Average Purchase price Normalized Totals Purchase Count  \textbackslash{}
+          Gender                                                           
+          Male                     4.01              2.95            633   
+          Female                   3.82              2.81            136   
+          Other                    4.46              3.24             11   
+          
+                 Total Purchase Value  
+          Gender                       
+          Male                1867.68  
+          Female               382.91  
+          Other                 35.74  
+\end{Verbatim}
+        
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}359}]:} \PY{n}{bins} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{6}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{14}\PY{p}{,} \PY{l+m+mi}{19}\PY{p}{,} \PY{l+m+mi}{24}\PY{p}{,} \PY{l+m+mi}{29}\PY{p}{,} \PY{l+m+mi}{34}\PY{p}{,} \PY{l+m+mi}{39}\PY{p}{,} \PY{l+m+mi}{44}\PY{p}{,} \PY{l+m+mi}{49}\PY{p}{,} \PY{l+m+mi}{54}\PY{p}{]}
+          \PY{n}{group\PYZus{}labels} \PY{o}{=} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{6 to 10}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{10 to 14}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{15 to 19}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{20 to 24}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{25 to 29}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{30 to 34}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{35 to 39}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{40 to 45}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{46 to 50}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{50 to 54}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+          \PY{n}{pd}\PY{o}{.}\PY{n}{cut}\PY{p}{(}\PY{n}{pymo\PYZus{}raw}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Age}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,}\PY{n}{bins}\PY{p}{,}\PY{n}{labels}\PY{o}{=}\PY{n}{group\PYZus{}labels}\PY{p}{)}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}359}]:} 0    35 to 39
+          1    20 to 24
+          2    30 to 34
+          3    20 to 24
+          4    20 to 24
+          Name: Age, dtype: category
+          Categories (10, object): [10 to 14 < 15 to 19 < 20 to 24 < 25 to 29 {\ldots} 40 to 45 < 46 to 50 < 50 to 54 < 6 to 10]
+\end{Verbatim}
+        
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}360}]:} \PY{n}{pymo\PYZus{}raw} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Age group}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{cut}\PY{p}{(}\PY{n}{pymo\PYZus{}raw}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Age}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,}\PY{n}{bins}\PY{p}{,}\PY{n}{labels}\PY{o}{=}\PY{n}{group\PYZus{}labels}\PY{p}{)}
+          \PY{n}{pymo\PYZus{}age} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{pymo\PYZus{}raw}\PY{p}{)}
+          \PY{n}{pymo\PYZus{}age}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}360}]:}    Age Gender  Item ID                                  Item Name  Price  \textbackslash{}
+          0   38   Male      165                Bone Crushing Silver Skewer   3.37   
+          1   21   Male      119  Stormbringer, Dark Blade of Ending Misery   2.32   
+          2   34   Male      174                            Primitive Blade   2.46   
+          3   21   Male       92                               Final Critic   1.36   
+          4   23   Male       63                             Stormfury Mace   1.27   
+          
+                       SN Age group  
+          0     Aelalis34  35 to 39  
+          1        Eolo46  20 to 24  
+          2   Assastnya25  30 to 34  
+          3  Pheusrical25  20 to 24  
+          4        Aela59  20 to 24  
+\end{Verbatim}
+        
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}361}]:} \PY{n}{age\PYZus{}df} \PY{o}{=} \PY{n}{pymo\PYZus{}age}\PY{p}{[}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Age group}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Item Name}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Price}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{]}
+          \PY{n}{gender\PYZus{}age} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{age\PYZus{}df}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Age group}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Item Name}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Price}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{}gender\PYZus{}age\PYZus{}sum = gender\PYZus{}age\PYZus{}sum[\PYZdq{}Item Name\PYZdq{}].count()}
+          \PY{n}{gender\PYZus{}age}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}361}]:}                                                 Price
+          Age group Item Name                                  
+          10 to 14  Aetherius, Boon of the Blessed         4.75
+                    Azurewrath                             4.44
+                    Betrayal, Whisper of Grieving Widows   2.35
+                    Blazeguard, Reach of Eternity          4.00
+                    Brimstone                              2.52
+\end{Verbatim}
+        
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}362}]:} \PY{n}{age\PYZus{}count} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{pymo\PYZus{}raw}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Age group}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SN}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{nunique}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+          \PY{n}{age\PYZus{}count} \PY{o}{=} \PY{n}{age\PYZus{}count}\PY{o}{.}\PY{n}{rename}\PY{p}{(}\PY{n}{columns}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SN}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Count}\PY{l+s+s2}{\PYZdq{}}\PY{p}{\PYZcb{}}\PY{p}{)}
+          \PY{n}{age\PYZus{}count}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}362}]:}            Count
+          Age group       
+          10 to 14      20
+          15 to 19     100
+          20 to 24     259
+          25 to 29      87
+          30 to 34      47
+          35 to 39      27
+          40 to 45      10
+          46 to 50       1
+          50 to 54       0
+          6 to 10       22
+\end{Verbatim}
+        
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}363}]:} \PY{n}{age\PYZus{}percent} \PY{o}{=} \PY{p}{(}\PY{n}{age\PYZus{}count}\PY{o}{/}\PY{n}{age\PYZus{}count}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{o}{*}\PY{l+m+mi}{100}
+          
+          \PY{n}{age\PYZus{}count}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Percent}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{age\PYZus{}percent}
+          \PY{n}{age\PYZus{}count}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}363}]:}            Count    Percent
+          Age group                  
+          10 to 14      20   3.490401
+          15 to 19     100  17.452007
+          20 to 24     259  45.200698
+          25 to 29      87  15.183246
+          30 to 34      47   8.202443
+          35 to 39      27   4.712042
+          40 to 45      10   1.745201
+          46 to 50       1   0.174520
+          50 to 54       0   0.000000
+          6 to 10       22   3.839442
+\end{Verbatim}
+        
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}364}]:} \PY{n}{count\PYZus{}age\PYZus{}df} \PY{o}{=} \PY{n}{pymo\PYZus{}raw}\PY{p}{[}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Age group}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Item Name}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Price}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{]}
+          \PY{n}{age\PYZus{}purchase\PYZus{}count} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{count\PYZus{}age\PYZus{}df}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Age group}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Item Name}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{}gender\PYZus{}purchase\PYZus{}count = gender\PYZus{}purchase\PYZus{}count[\PYZsq{}Item Name\PYZsq{}].count()}
+          \PY{n}{age\PYZus{}purchase\PYZus{}count} \PY{o}{=} \PY{n}{age\PYZus{}purchase\PYZus{}count}\PY{o}{.}\PY{n}{rename}\PY{p}{(}\PY{n}{columns}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Price}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Count}\PY{l+s+s2}{\PYZdq{}}\PY{p}{\PYZcb{}}\PY{p}{)}
+          \PY{n}{age\PYZus{}purchase\PYZus{}count1} \PY{o}{=} \PY{n}{age\PYZus{}purchase\PYZus{}count}\PY{o}{.}\PY{n}{fillna}\PY{p}{(}\PY{n}{value}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+          \PY{n}{age\PYZus{}purchase\PYZus{}count1}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}364}]:}                                           Count
+          Age group Item Name                            
+          10 to 14  Abyssal Shard                     0.0
+                    Aetherius, Boon of the Blessed    1.0
+                    Agatha                            0.0
+                    Alpha                             0.0
+                    Alpha, Oath of Zeal               0.0
+\end{Verbatim}
+        
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}365}]:} \PY{n}{age\PYZus{}purchase\PYZus{}sum1} \PY{o}{=} \PY{n}{age\PYZus{}purchase\PYZus{}count1}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{10 to 14}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          \PY{n}{age\PYZus{}purchase\PYZus{}sum2} \PY{o}{=} \PY{n}{age\PYZus{}purchase\PYZus{}count1}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{15 to 19}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          \PY{n}{age\PYZus{}purchase\PYZus{}sum3} \PY{o}{=} \PY{n}{age\PYZus{}purchase\PYZus{}count1}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{20 to 24}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          \PY{n}{age\PYZus{}purchase\PYZus{}sum4} \PY{o}{=} \PY{n}{age\PYZus{}purchase\PYZus{}count1}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{25 to 29}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          \PY{n}{age\PYZus{}purchase\PYZus{}sum5} \PY{o}{=} \PY{n}{age\PYZus{}purchase\PYZus{}count1}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{30 to 34}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          \PY{n}{age\PYZus{}purchase\PYZus{}sum6} \PY{o}{=} \PY{n}{age\PYZus{}purchase\PYZus{}count1}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{35 to 39}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          \PY{n}{age\PYZus{}purchase\PYZus{}sum7} \PY{o}{=} \PY{n}{age\PYZus{}purchase\PYZus{}count1}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{40 to 45}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          \PY{n}{age\PYZus{}purchase\PYZus{}sum8} \PY{o}{=} \PY{n}{age\PYZus{}purchase\PYZus{}count1}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{46 to 50}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          \PY{n}{age\PYZus{}purchase\PYZus{}sum9} \PY{o}{=} \PY{n}{age\PYZus{}purchase\PYZus{}count1}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{6 to 10}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{10 to 14 purchase count: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{p}{(}\PY{n+nb}{str}\PY{p}{(}\PY{n}{age\PYZus{}purchase\PYZus{}sum1}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{15 to 19 purchase count: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{p}{(}\PY{n+nb}{str}\PY{p}{(}\PY{n}{age\PYZus{}purchase\PYZus{}sum2}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{20 to 24 purchase count: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{p}{(}\PY{n+nb}{str}\PY{p}{(}\PY{n}{age\PYZus{}purchase\PYZus{}sum3}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{25 to 29 purchase count: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{p}{(}\PY{n+nb}{str}\PY{p}{(}\PY{n}{age\PYZus{}purchase\PYZus{}sum4}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{30 to 34 purchase count: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{p}{(}\PY{n+nb}{str}\PY{p}{(}\PY{n}{age\PYZus{}purchase\PYZus{}sum5}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{35 to 39 purchase count: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{p}{(}\PY{n+nb}{str}\PY{p}{(}\PY{n}{age\PYZus{}purchase\PYZus{}sum6}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{40 to 45 purchase count: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{p}{(}\PY{n+nb}{str}\PY{p}{(}\PY{n}{age\PYZus{}purchase\PYZus{}sum7}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{46 to 50 purchase count: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{p}{(}\PY{n+nb}{str}\PY{p}{(}\PY{n}{age\PYZus{}purchase\PYZus{}sum8}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{6 to 10 purchase count: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{p}{(}\PY{n+nb}{str}\PY{p}{(}\PY{n}{age\PYZus{}purchase\PYZus{}sum9}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+10 to 14 purchase count: 31.0
+15 to 19 purchase count: 133.0
+20 to 24 purchase count: 336.0
+25 to 29 purchase count: 125.0
+30 to 34 purchase count: 64.0
+35 to 39 purchase count: 42.0
+40 to 45 purchase count: 16.0
+46 to 50 purchase count: 1.0
+6 to 10 purchase count: 32.0
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}366}]:} \PY{c+c1}{\PYZsh{}Total Purchase value}
+          \PY{n}{age\PYZus{}purchase\PYZus{}1} \PY{o}{=} \PY{n}{gender\PYZus{}age}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{10 to 14}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          \PY{n}{age\PYZus{}purchase\PYZus{}2} \PY{o}{=} \PY{n}{gender\PYZus{}age}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{15 to 19}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          \PY{n}{age\PYZus{}purchase\PYZus{}3} \PY{o}{=} \PY{n}{gender\PYZus{}age}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{20 to 24}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          \PY{n}{age\PYZus{}purchase\PYZus{}4} \PY{o}{=} \PY{n}{gender\PYZus{}age}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{25 to 29}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          \PY{n}{age\PYZus{}purchase\PYZus{}5} \PY{o}{=} \PY{n}{gender\PYZus{}age}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{30 to 34}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          \PY{n}{age\PYZus{}purchase\PYZus{}6} \PY{o}{=} \PY{n}{gender\PYZus{}age}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{35 to 39}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          \PY{n}{age\PYZus{}purchase\PYZus{}7} \PY{o}{=} \PY{n}{gender\PYZus{}age}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{40 to 45}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          \PY{n}{age\PYZus{}purchase\PYZus{}8} \PY{o}{=} \PY{n}{gender\PYZus{}age}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{46 to 50}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          \PY{n}{age\PYZus{}purchase\PYZus{}9} \PY{o}{=} \PY{n}{gender\PYZus{}age}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{6 to 10}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{10 to 14 purchase price: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{p}{(}\PY{n+nb}{str}\PY{p}{(}\PY{n}{age\PYZus{}purchase\PYZus{}1}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Price}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{15 to 19 purchase price: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{p}{(}\PY{n+nb}{str}\PY{p}{(}\PY{n}{age\PYZus{}purchase\PYZus{}2}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Price}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{20 to 24 purchase price: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{p}{(}\PY{n+nb}{str}\PY{p}{(}\PY{n}{age\PYZus{}purchase\PYZus{}3}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Price}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{25 to 29 purchase price: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{p}{(}\PY{n+nb}{str}\PY{p}{(}\PY{n}{age\PYZus{}purchase\PYZus{}4}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Price}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{30 to 34 purchase price: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{p}{(}\PY{n+nb}{str}\PY{p}{(}\PY{n}{age\PYZus{}purchase\PYZus{}5}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Price}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{35 to 39 purchase price: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{p}{(}\PY{n+nb}{str}\PY{p}{(}\PY{n}{age\PYZus{}purchase\PYZus{}6}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Price}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{40 to 45 purchase price: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{p}{(}\PY{n+nb}{str}\PY{p}{(}\PY{n}{age\PYZus{}purchase\PYZus{}7}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Price}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{46 to 50 purchase price: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{p}{(}\PY{n+nb}{str}\PY{p}{(}\PY{n}{age\PYZus{}purchase\PYZus{}8}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Price}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{6 to 10 purchase price: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{p}{(}\PY{n+nb}{str}\PY{p}{(}\PY{n}{age\PYZus{}purchase\PYZus{}9}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Price}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+10 to 14 purchase price: 83.78999999999999
+15 to 19 purchase price: 386.4199999999998
+20 to 24 purchase price: 978.7699999999999
+25 to 29 purchase price: 370.3300000000001
+30 to 34 purchase price: 197.24999999999994
+35 to 39 purchase price: 119.39999999999998
+40 to 45 purchase price: 51.029999999999994
+46 to 50 purchase price: 2.7199999999999998
+6 to 10 purchase price: 96.61999999999998
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}367}]:} \PY{c+c1}{\PYZsh{}Average purchase price}
+          \PY{n}{age\PYZus{}average\PYZus{}price1} \PY{o}{=} \PY{p}{(}\PY{n}{age\PYZus{}purchase\PYZus{}1}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{31}\PY{p}{)}
+          \PY{n}{age\PYZus{}average\PYZus{}price2} \PY{o}{=} \PY{p}{(}\PY{n}{age\PYZus{}purchase\PYZus{}2}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{133}\PY{p}{)}
+          \PY{n}{age\PYZus{}average\PYZus{}price3} \PY{o}{=} \PY{p}{(}\PY{n}{age\PYZus{}purchase\PYZus{}3}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{336}\PY{p}{)}
+          \PY{n}{age\PYZus{}average\PYZus{}price4} \PY{o}{=} \PY{p}{(}\PY{n}{age\PYZus{}purchase\PYZus{}4}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{125}\PY{p}{)}
+          \PY{n}{age\PYZus{}average\PYZus{}price5} \PY{o}{=} \PY{p}{(}\PY{n}{age\PYZus{}purchase\PYZus{}5}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{64}\PY{p}{)}
+          \PY{n}{age\PYZus{}average\PYZus{}price6} \PY{o}{=} \PY{p}{(}\PY{n}{age\PYZus{}purchase\PYZus{}6}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{42}\PY{p}{)}
+          \PY{n}{age\PYZus{}average\PYZus{}price7} \PY{o}{=} \PY{p}{(}\PY{n}{age\PYZus{}purchase\PYZus{}7}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{16}\PY{p}{)}
+          \PY{n}{age\PYZus{}average\PYZus{}price8} \PY{o}{=} \PY{p}{(}\PY{n}{age\PYZus{}purchase\PYZus{}8}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{1}\PY{p}{)}
+          \PY{n}{age\PYZus{}average\PYZus{}price9} \PY{o}{=} \PY{p}{(}\PY{n}{age\PYZus{}purchase\PYZus{}9}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{31}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{10 to 14 average purchase: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{p}{(}\PY{n+nb}{str}\PY{p}{(}\PY{n}{age\PYZus{}average\PYZus{}price1}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{15 to 19 average purchase: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{p}{(}\PY{n+nb}{str}\PY{p}{(}\PY{n}{age\PYZus{}average\PYZus{}price2}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{20 to 24 average purchase: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{p}{(}\PY{n+nb}{str}\PY{p}{(}\PY{n}{age\PYZus{}average\PYZus{}price3}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{25 to 29 average purchase: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{p}{(}\PY{n+nb}{str}\PY{p}{(}\PY{n}{age\PYZus{}average\PYZus{}price4}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{30 to 34 average purchase: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{p}{(}\PY{n+nb}{str}\PY{p}{(}\PY{n}{age\PYZus{}average\PYZus{}price5}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{35 to 39 average purchase: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{p}{(}\PY{n+nb}{str}\PY{p}{(}\PY{n}{age\PYZus{}average\PYZus{}price6}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{40 to 45 average purchase: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{p}{(}\PY{n+nb}{str}\PY{p}{(}\PY{n}{age\PYZus{}average\PYZus{}price7}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{46 to 50 average purchase: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{p}{(}\PY{n+nb}{str}\PY{p}{(}\PY{n}{age\PYZus{}average\PYZus{}price8}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{6 to 10 average purchase: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{p}{(}\PY{n+nb}{str}\PY{p}{(}\PY{n}{age\PYZus{}average\PYZus{}price9}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+10 to 14 average purchase: Price    2.702903
+dtype: float64
+15 to 19 average purchase: Price    2.905414
+dtype: float64
+20 to 24 average purchase: Price    2.913006
+dtype: float64
+25 to 29 average purchase: Price    2.96264
+dtype: float64
+30 to 34 average purchase: Price    3.082031
+dtype: float64
+35 to 39 average purchase: Price    2.842857
+dtype: float64
+40 to 45 average purchase: Price    3.189375
+dtype: float64
+46 to 50 average purchase: Price    2.72
+dtype: float64
+6 to 10 average purchase: Price    3.116774
+dtype: float64
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}368}]:} \PY{c+c1}{\PYZsh{}Normalized purchase price}
+          \PY{n}{age\PYZus{}normalized\PYZus{}price1} \PY{o}{=} \PY{p}{(}\PY{n}{age\PYZus{}purchase\PYZus{}1}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{20}\PY{p}{)}
+          \PY{n}{age\PYZus{}normalized\PYZus{}price2} \PY{o}{=} \PY{p}{(}\PY{n}{age\PYZus{}purchase\PYZus{}2}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{100}\PY{p}{)}
+          \PY{n}{age\PYZus{}normalized\PYZus{}price3} \PY{o}{=} \PY{p}{(}\PY{n}{age\PYZus{}purchase\PYZus{}3}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{259}\PY{p}{)}
+          \PY{n}{age\PYZus{}normalized\PYZus{}price4} \PY{o}{=} \PY{p}{(}\PY{n}{age\PYZus{}purchase\PYZus{}4}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{87}\PY{p}{)}
+          \PY{n}{age\PYZus{}normalized\PYZus{}price5} \PY{o}{=} \PY{p}{(}\PY{n}{age\PYZus{}purchase\PYZus{}5}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{47}\PY{p}{)}
+          \PY{n}{age\PYZus{}normalized\PYZus{}price6} \PY{o}{=} \PY{p}{(}\PY{n}{age\PYZus{}purchase\PYZus{}6}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{27}\PY{p}{)}
+          \PY{n}{age\PYZus{}normalized\PYZus{}price7} \PY{o}{=} \PY{p}{(}\PY{n}{age\PYZus{}purchase\PYZus{}7}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{10}\PY{p}{)}
+          \PY{n}{age\PYZus{}normalized\PYZus{}price8} \PY{o}{=} \PY{p}{(}\PY{n}{age\PYZus{}purchase\PYZus{}8}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{1}\PY{p}{)}
+          \PY{n}{age\PYZus{}normalized\PYZus{}price9} \PY{o}{=} \PY{p}{(}\PY{n}{age\PYZus{}purchase\PYZus{}9}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{22}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{10 to 14 normalized purchase: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{p}{(}\PY{n+nb}{str}\PY{p}{(}\PY{n}{age\PYZus{}normalized\PYZus{}price1}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{15 to 19 normalized purchase: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{p}{(}\PY{n+nb}{str}\PY{p}{(}\PY{n}{age\PYZus{}normalized\PYZus{}price2}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{20 to 24 normalized purchase: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{p}{(}\PY{n+nb}{str}\PY{p}{(}\PY{n}{age\PYZus{}normalized\PYZus{}price3}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{25 to 29 normalized purchase: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{p}{(}\PY{n+nb}{str}\PY{p}{(}\PY{n}{age\PYZus{}normalized\PYZus{}price4}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{30 to 34 normalized purchase: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{p}{(}\PY{n+nb}{str}\PY{p}{(}\PY{n}{age\PYZus{}normalized\PYZus{}price5}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{35 to 39 normalized purchase: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{p}{(}\PY{n+nb}{str}\PY{p}{(}\PY{n}{age\PYZus{}normalized\PYZus{}price6}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{40 to 45 normalized purchase: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{p}{(}\PY{n+nb}{str}\PY{p}{(}\PY{n}{age\PYZus{}normalized\PYZus{}price7}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{46 to 50 normalized purchase: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{p}{(}\PY{n+nb}{str}\PY{p}{(}\PY{n}{age\PYZus{}normalized\PYZus{}price8}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{6 to 10 normalized purchase: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{p}{(}\PY{n+nb}{str}\PY{p}{(}\PY{n}{age\PYZus{}normalized\PYZus{}price9}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+10 to 14 normalized purchase: Price    4.1895
+dtype: float64
+15 to 19 normalized purchase: Price    3.8642
+dtype: float64
+20 to 24 normalized purchase: Price    3.779035
+dtype: float64
+25 to 29 normalized purchase: Price    4.256667
+dtype: float64
+30 to 34 normalized purchase: Price    4.196809
+dtype: float64
+35 to 39 normalized purchase: Price    4.422222
+dtype: float64
+40 to 45 normalized purchase: Price    5.103
+dtype: float64
+46 to 50 normalized purchase: Price    2.72
+dtype: float64
+6 to 10 normalized purchase: Price    4.391818
+dtype: float64
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}369}]:} \PY{n}{age\PYZus{}data} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Age group}\PY{l+s+s1}{\PYZsq{}} \PY{p}{:} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{10 to 14}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{15 to 19}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{20 to 24}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{25 to 29}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{30 to 34}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{35 to 39}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{40 to 45}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{46 to 50}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{6 to 10}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}
+                                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Purchase Count}\PY{l+s+s1}{\PYZsq{}} \PY{p}{:} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{31}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{133}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{336}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{125}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{64}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{42}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{16}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{31}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}
+                                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Average Purchase price}\PY{l+s+s1}{\PYZsq{}} \PY{p}{:} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2.70}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2.90}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2.91}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2.96}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{3.08}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2.84}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{3.18}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2.72}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{3.11}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}
+                                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Total Purchase Value}\PY{l+s+s1}{\PYZsq{}} \PY{p}{:} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{83.78}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{386.41}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{978.76}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{370.33}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{197.24}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{119.39}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{51.02}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2.71}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{96.61}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}
+                                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Normalized Totals}\PY{l+s+s1}{\PYZsq{}} \PY{p}{:} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{4.18}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{3.86}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{3.77}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{4.25}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{4.19}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{4.42}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{5.10}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2.72}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{4.39}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{\PYZcb{}}\PY{p}{)}
+          \PY{n}{age\PYZus{}data} \PY{o}{=} \PY{n}{age\PYZus{}data}\PY{o}{.}\PY{n}{set\PYZus{}index}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Age group}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          \PY{n}{age\PYZus{}data}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}369}]:}           Average Purchase price Normalized Totals Purchase Count  \textbackslash{}
+          Age group                                                           
+          10 to 14                    2.70              4.18             31   
+          15 to 19                    2.90              3.86            133   
+          20 to 24                    2.91              3.77            336   
+          25 to 29                    2.96              4.25            125   
+          30 to 34                    3.08              4.19             64   
+          35 to 39                    2.84              4.42             42   
+          40 to 45                    3.18              5.10             16   
+          46 to 50                    2.72              2.72              1   
+          6 to 10                     3.11              4.39             31   
+          
+                    Total Purchase Value  
+          Age group                       
+          10 to 14                 83.78  
+          15 to 19                386.41  
+          20 to 24                978.76  
+          25 to 29                370.33  
+          30 to 34                197.24  
+          35 to 39                119.39  
+          40 to 45                 51.02  
+          46 to 50                  2.71  
+          6 to 10                  96.61  
+\end{Verbatim}
+        
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}379}]:} \PY{n}{sn\PYZus{}data} \PY{o}{=} \PY{n}{pymo\PYZus{}raw}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SN}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+          \PY{n}{sn\PYZus{}data\PYZus{}count} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{sn\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Price}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+          \PY{n}{sn\PYZus{}data\PYZus{}count}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+          \PY{n}{sn\PYZus{}data\PYZus{}count}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}379}]:}              SN  Price
+          0  Adairialis76      1
+          1    Aduephos78      3
+          2     Aeduera68      3
+          3        Aela49      1
+          4        Aela59      1
+\end{Verbatim}
+        
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}382}]:} \PY{n}{sn\PYZus{}data} \PY{o}{=} \PY{n}{pymo\PYZus{}raw}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SN}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+          \PY{n}{sn\PYZus{}data1} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{sn\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Price}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+          \PY{n}{sn\PYZus{}data1}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+          \PY{n}{sn\PYZus{}data1}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}382}]:}              SN  Price
+          0  Adairialis76   2.46
+          1    Aduephos78   6.70
+          2     Aeduera68   5.80
+          3        Aela49   2.46
+          4        Aela59   1.27
+\end{Verbatim}
+        
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}396}]:} \PY{n}{merge\PYZus{}data} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{merge}\PY{p}{(}\PY{n}{sn\PYZus{}data1}\PY{p}{,} \PY{n}{sn\PYZus{}data\PYZus{}count}\PY{p}{,} \PY{n}{on}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SN}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{merge\PYZus{}data} \PY{o}{=} \PY{n}{merge\PYZus{}data}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Price\PYZus{}x}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{ascending}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+          \PY{n}{merge\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Average Purchase Price}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{sn\PYZus{}data1}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Price}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{/}\PY{n}{sn\PYZus{}data\PYZus{}count}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Price}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+          \PY{n}{merge\PYZus{}data} \PY{o}{=} \PY{n}{merge\PYZus{}data}\PY{o}{.}\PY{n}{rename}\PY{p}{(}\PY{n}{columns}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Price\PYZus{}x}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Total Purchase Value}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Price\PYZus{}y}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Purchase Count}\PY{l+s+s2}{\PYZdq{}}\PY{p}{\PYZcb{}}\PY{p}{)}
+          \PY{n}{merge\PYZus{}data} \PY{o}{=} \PY{n}{merge\PYZus{}data}\PY{o}{.}\PY{n}{set\PYZus{}index}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SN}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          \PY{n}{merge\PYZus{}data}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}396}]:}              Total Purchase Value  Purchase Count  Average Purchase Price
+          SN                                                                       
+          Undirrala66                 17.06               5                3.412000
+          Saedue76                    13.56               4                3.390000
+          Mindimnya67                 12.74               4                3.185000
+          Haellysu29                  12.73               3                4.243333
+          Eoda93                      11.58               3                3.860000
+\end{Verbatim}
+        
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}480}]:} \PY{n}{price\PYZus{}data} \PY{o}{=} \PY{n}{pymo\PYZus{}raw}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Item Name}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+          \PY{n}{price\PYZus{}data\PYZus{}count} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{price\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Price}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+          \PY{n}{price\PYZus{}data\PYZus{}count}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{}price\PYZus{}data\PYZus{}count = price\PYZus{}data\PYZus{}count.sort\PYZus{}values([\PYZsq{}Price\PYZsq{}], ascending=False)}
+          \PY{n}{price\PYZus{}data\PYZus{}count}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}480}]:}                         Item Name  Price
+          0                   Abyssal Shard      3
+          1  Aetherius, Boon of the Blessed      4
+          2                          Agatha      5
+          3                           Alpha      7
+          4             Alpha, Oath of Zeal      7
+\end{Verbatim}
+        
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}487}]:} \PY{n}{price\PYZus{}data1} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{pymo\PYZus{}raw}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Item Name}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Item ID}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Price}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{}price\PYZus{}data2 = price\PYZus{}data1.groupby([\PYZsq{}Item Name\PYZsq{}])}
+          \PY{n}{price\PYZus{}data1}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}487}]:}                                    Item Name  Item ID  Price
+          0                Bone Crushing Silver Skewer      165   3.37
+          1  Stormbringer, Dark Blade of Ending Misery      119   2.32
+          2                            Primitive Blade      174   2.46
+          3                               Final Critic       92   1.36
+          4                             Stormfury Mace       63   1.27
+\end{Verbatim}
+        
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}503}]:} \PY{c+c1}{\PYZsh{}Most profitable item}
+          \PY{n}{merge\PYZus{}data1} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{merge}\PY{p}{(}\PY{n}{price\PYZus{}data1}\PY{p}{,} \PY{n}{price\PYZus{}data\PYZus{}count}\PY{p}{,} \PY{n}{on}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Item Name}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{how} \PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{left}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{merge\PYZus{}data1}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Total Purchase Price}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{price\PYZus{}data1}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Price}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{*}\PY{n}{price\PYZus{}data\PYZus{}count}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Price}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+          \PY{n}{merge\PYZus{}data1} \PY{o}{=} \PY{n}{merge\PYZus{}data1}\PY{o}{.}\PY{n}{rename}\PY{p}{(}\PY{n}{columns}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Price\PYZus{}x}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Item Price}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Price\PYZus{}y}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Purchase Count}\PY{l+s+s2}{\PYZdq{}}\PY{p}{\PYZcb{}}\PY{p}{)}
+          \PY{n}{merge\PYZus{}data1} \PY{o}{=} \PY{n}{merge\PYZus{}data1}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Total Purchase Price}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{ascending}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+          \PY{n}{merge\PYZus{}data1} \PY{o}{=} \PY{n}{merge\PYZus{}data1}\PY{o}{.}\PY{n}{set\PYZus{}index}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Item ID}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          \PY{n}{merge\PYZus{}data1}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}503}]:}                                 Item Name  Item Price  Purchase Count  \textbackslash{}
+          Item ID                                                                 
+          57        Despair, Favor of Due Diligence        3.81               5   
+          49       The Oculus, Token of Lost Worlds        4.23               5   
+          105          Hailstorm Shadowsteel Scythe        3.73               3   
+          101                          Final Critic        4.62              14   
+          118      Ghost Reaver, Longsword of Magic        2.77               3   
+          
+                   Total Purchase Price  
+          Item ID                        
+          57                      34.29  
+          49                      33.84  
+          105                     33.57  
+          101                     32.34  
+          118                     30.47  
+\end{Verbatim}
+        
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}513}]:} \PY{n}{popular\PYZus{}data} \PY{o}{=} \PY{n}{pymo\PYZus{}raw}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Item Name}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+          \PY{n}{popular\PYZus{}data\PYZus{}count} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{popular\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Price}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+          \PY{n}{popular\PYZus{}data\PYZus{}count}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+          \PY{n}{popular\PYZus{}data\PYZus{}count}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}513}]:}                         Item Name  Price
+          0                   Abyssal Shard      3
+          1  Aetherius, Boon of the Blessed      4
+          2                          Agatha      5
+          3                           Alpha      7
+          4             Alpha, Oath of Zeal      7
+\end{Verbatim}
+        
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}514}]:} \PY{n}{popular\PYZus{}data} \PY{o}{=} \PY{n}{pymo\PYZus{}raw}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Item Name}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+          \PY{n}{popular\PYZus{}data1} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{popular\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Price}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+          \PY{n}{popular\PYZus{}data1}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+          \PY{n}{popular\PYZus{}data1}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}514}]:}                         Item Name  Price
+          0                   Abyssal Shard   6.12
+          1  Aetherius, Boon of the Blessed  19.00
+          2                          Agatha   9.55
+          3                           Alpha  10.92
+          4             Alpha, Oath of Zeal  20.16
+\end{Verbatim}
+        
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}530}]:} \PY{c+c1}{\PYZsh{}Most Popular Item}
+          \PY{n}{merge\PYZus{}data2} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{merge}\PY{p}{(}\PY{n}{popular\PYZus{}data1}\PY{p}{,} \PY{n}{popular\PYZus{}data\PYZus{}count}\PY{p}{,} \PY{n}{on}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Item Name}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{merge\PYZus{}data2}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Item Price}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{popular\PYZus{}data1}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Price}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{/}\PY{n}{popular\PYZus{}data\PYZus{}count}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Price}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+          \PY{n}{merge\PYZus{}data2} \PY{o}{=} \PY{n}{merge\PYZus{}data2}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Price\PYZus{}y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{ascending}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+          \PY{n}{merge\PYZus{}data2} \PY{o}{=} \PY{n}{merge\PYZus{}data2}\PY{o}{.}\PY{n}{rename}\PY{p}{(}\PY{n}{columns}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Price\PYZus{}y}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Purchase Count}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Item Price}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Item Price Value}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Price\PYZus{}x}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Total Value}\PY{l+s+s2}{\PYZdq{}}\PY{p}{\PYZcb{}}\PY{p}{)}
+          \PY{n}{merge\PYZus{}data2} \PY{o}{=} \PY{n}{merge\PYZus{}data2}\PY{o}{.}\PY{n}{set\PYZus{}index}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Item Name}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          \PY{n}{merge\PYZus{}data2}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}530}]:}                                       Total Value  Purchase Count  \textbackslash{}
+          Item Name                                                           
+          Final Critic                                38.60              14   
+          Arcane Gem                                  24.53              11   
+          Betrayal, Whisper of Grieving Widows        25.85              11   
+          Stormcaller                                 34.65              10   
+          Woeful Adamantite Claymore                  11.16               9   
+          
+                                                Item Price Value  
+          Item Name                                               
+          Final Critic                                  2.757143  
+          Arcane Gem                                    2.230000  
+          Betrayal, Whisper of Grieving Widows          2.350000  
+          Stormcaller                                   3.465000  
+          Woeful Adamantite Claymore                    1.240000  
+\end{Verbatim}
+        
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{output} \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Pymoli}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pymoli.tex}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{wrestlers\PYZus{}df}\PY{o}{.}\PY{n}{to\PYZus{}}\PY{p}{(}\PY{n}{output}\PY{p}{,} \PY{n}{header}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
